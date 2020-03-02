@@ -1,0 +1,107 @@
+name: CI
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+
+env:
+  CI: true
+  TZ: Europe/Paris
+  NODE_VERSION: 10.x
+
+  # Application
+  VUE_APP_API_ENDPOINT: 'http://localhost:3000'
+
+jobs:
+
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - uses: actions/checkout@v2
+
+      - name: Cache node_modules
+        uses: actions/cache@v1
+        with:
+          path: ${{ github.workspace }}/node_modules
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-node-modules-
+
+      - run: yarn install --frozen-lockfile
+      - run: yarn lint
+      - run: yarn build
+
+#  cypress:
+#    if: github.event.pull_request.draft == false
+#    runs-on: ubuntu-16.04
+#    name: cypress
+#    services:
+#      postgres:
+#        image: postgres:11
+#        env:
+#          POSTGRES_USER: airpnp
+#          POSTGRES_PASSWORD: airpnp
+#          POSTGRES_DB: airpnp
+#        ports:
+#          - 5432:5432
+#        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+#      redis:
+#        image: redis
+#        ports:
+#          - 6379:6379
+#        options: --entrypoint redis-server
+#
+#    steps:
+#      - uses: actions/checkout@v2
+#
+#      - name: Auth to github registry
+#        run: docker login docker.pkg.github.com -u ${{ secrets.GITHUB_REGISTRY_LOGIN }} -p ${{ secrets.GITHUB_REGISTRY_TOKEN }}
+#
+#      - name: Get docker network id
+#        run: echo "::set-env name=GITHUB_NETWORK_ID::$(docker network ls -qf name=github)"
+#
+#      - name: Create backend container
+#        run: docker create --env-file .env.backend.test -p 3000 --rm --name airpnp-backend docker.pkg.github.com/airpnp-ynov/airpnp-backend/airpnp-backend:latest --network ${{ env.GITHUB_NETWORK_ID }} --network-alias airpnp-backend
+#
+#      - name: Start backend container
+#        run: docker start airpnp-backend
+#
+#      - name: debug
+#        run: docker ps -a
+#
+#      - name: Run fixtures on backend
+#        run: sleep 5s && docker exec airpnp-backend yarn fixtures
+#
+#      - name: Install Node.js
+#        uses: actions/setup-node@v1
+#        with:
+#          node-version: ${{ env.NODE_VERSION }}
+#
+#      - name: Cache node_modules
+#        uses: actions/cache@v1
+#        with:
+#          path: ${{ github.workspace }}/node_modules
+#          key: ${{ runner.os }}-node-modules-${{ hashFiles('**/yarn.lock') }}
+#          restore-keys: |
+#            ${{ runner.os }}-node-modules-
+#
+#      - run: yarn install --frozen-lockfile
+#
+#      - run: yarn cypress install
+#
+#      - run: yarn build --no-lint
+#
+#      - name: Run Cypress
+#        uses: cypress-io/github-action@v1
+#        with:
+#          start: yarn serve
+#          wait-on: http://localhost:8080
+#          parallel: true
+#
+#      - name: Cleanup backend
+#        run: killall node
