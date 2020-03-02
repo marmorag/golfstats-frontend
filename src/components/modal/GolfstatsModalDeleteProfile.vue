@@ -23,7 +23,7 @@
 import ModalMixin from '../../mixins/ModalMixin';
 
 export default {
-  name: 'AirpnpModalDeleteProfile',
+  name: 'GolfstatsModalDeleteProfile',
   mixins: [ModalMixin],
   methods: {
     handleSaved() {

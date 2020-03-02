@@ -7,7 +7,7 @@
                 </v-card-title>
                 <v-card-text>
                     <v-container>
-                        <AirpnpUserForm ref="userForm" v-model="user" @sumitted="handleSaved"/>
+                        <GolfstatsUserForm ref="userForm" v-model="user" @sumitted="handleSaved"/>
                     </v-container>
                 </v-card-text>
                 <v-card-actions>
@@ -21,12 +21,12 @@
 </template>
 
 <script>
-import AirpnpUserForm from '../AirpnpUserForm.vue';
+import GolfstatsUserForm from '../GolfstatsUserForm.vue';
 import ModalMixin from '../../mixins/ModalMixin';
 
 export default {
-  name: 'AirpnpModalEditProfile',
-  components: { AirpnpUserForm },
+  name: 'GolfstatsModalEditProfile',
+  components: { GolfstatsUserForm },
   mixins: [ModalMixin],
   data() {
     return {

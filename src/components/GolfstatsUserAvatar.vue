@@ -1,12 +1,12 @@
 <template>
-    <v-avatar :color="color" size="30" class="AirpnpUserAvatar">
+    <v-avatar :color="color" size="30" class="GolfstatsUserAvatar">
         <span :class="`${fontColor}--text headline`">{{ avatar }}</span>
     </v-avatar>
 </template>
 
 <script>
 export default {
-  name: 'AirpnpUserAvatar',
+  name: 'GolfstatsUserAvatar',
   props: {
     color: {
       type: String,
@@ -26,7 +26,7 @@ export default {
 </script>
 
 <style scoped>
-    .AirpnpUserAvatar span {
+    .GolfstatsUserAvatar span {
         text-transform: uppercase;
     }
 </style>

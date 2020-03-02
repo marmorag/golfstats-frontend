@@ -66,8 +66,8 @@
 </template>
 
 <script>
-import AirpnpToast from './components/AirpnpToast.vue';
-import AirpnpUserAvatar from './components/AirpnpUserAvatar.vue';
+import AirpnpToast from './components/GolfstatsToast.vue';
+import AirpnpUserAvatar from './components/GolfstatsUserAvatar.vue';
 
 export default {
   name: 'App',

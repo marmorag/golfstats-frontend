@@ -10,7 +10,7 @@
         <v-sheet elevation="3" tile class="pa-5">
           <v-row>
             <v-col cols="1">
-              <AirpnpUserAvatar color="primary" font-color="white"/>
+              <GolfstatsUserAvatar color="primary" font-color="white"/>
             </v-col>
             <v-col cols="8">
               <v-row>
@@ -35,8 +35,8 @@
         </v-sheet>
       </v-col>
     </v-row>
-    <AirpnpModalEditProfile ref="editProfileModal" @saved="handleEditProfile"/>
-    <AirpnpModalDeleteProfile ref="deleteProfileModal" @confirmed="handleDeleteProfile"/>
+    <GolfstatsModalEditProfile ref="editProfileModal" @saved="handleEditProfile"/>
+    <GolfstatsModalDeleteProfile ref="deleteProfileModal" @confirmed="handleDeleteProfile"/>
   </v-container>
 </template>
 
@@ -44,15 +44,15 @@
 import { format } from 'date-fns';
 import UserApi from '../services/api/User';
 import MessageBus from '../services/messageBus';
-import AirpnpUserAvatar from '../components/AirpnpUserAvatar.vue';
-import AirpnpModalEditProfile from '../components/modal/AirpnpModalEditProfile.vue';
-import AirpnpModalDeleteProfile from '../components/modal/AirpnpModalDeleteProfile.vue';
+import GolfstatsUserAvatar from '../components/GolfstatsUserAvatar.vue';
+import GolfstatsModalEditProfile from '../components/modal/GolfstatsModalEditProfile.vue';
+import GolfstatsModalDeleteProfile from '../components/modal/GolfstatsModalDeleteProfile.vue';
 import HttpClientMixin from '../mixins/HttpClientMixin';
 
 export default {
   name: 'Account',
   mixins: [HttpClientMixin],
-  components: { AirpnpUserAvatar, AirpnpModalEditProfile, AirpnpModalDeleteProfile },
+  components: { GolfstatsUserAvatar, GolfstatsModalEditProfile, GolfstatsModalDeleteProfile },
   created() {
     this.userApi = new UserApi(this.httpClient);
 

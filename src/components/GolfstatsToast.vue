@@ -11,7 +11,7 @@
 import MessageBus from '../services/messageBus';
 
 export default {
-  name: 'AirpnpToast',
+  name: 'GolfstatsToast',
   mounted() {
     MessageBus.$on('toast', this.open);
     MessageBus.$on('toast:close', this.close);

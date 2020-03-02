@@ -8,7 +8,7 @@
                         <v-spacer />
                     </v-toolbar>
                     <v-card-text>
-                        <AirpnpUserForm v-model="user" @sumitted="handleRegister"/>
+                        <GolfstatsUserForm v-model="user" @sumitted="handleRegister"/>
                     </v-card-text>
                     <v-card-actions>
                         <v-spacer />
@@ -24,12 +24,12 @@
 <script>
 import UserApi from '../services/api/User';
 import MessageBus from '../services/messageBus';
-import AirpnpUserForm from '../components/AirpnpUserForm.vue';
+import GolfstatsUserForm from '../components/GolfstatsUserForm.vue';
 import HttpClientMixin from '../mixins/HttpClientMixin';
 
 export default {
   name: 'Login',
-  components: { AirpnpUserForm },
+  components: { GolfstatsUserForm },
   mixins: [HttpClientMixin],
   data() {
     return {

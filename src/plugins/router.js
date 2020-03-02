@@ -24,24 +24,6 @@ const routes = [
     },
   },
   {
-    path: '/map',
-    name: 'map',
-    // eslint-disable-next-line global-require
-    component: require('../views/Map').default,
-    meta: {
-      requireAuth: false,
-    },
-  },
-  {
-    path: '/my-toilets',
-    name: 'mytoilets',
-    // eslint-disable-next-line global-require
-    component: require('../views/Toilets').default,
-    meta: {
-      requireAuth: false,
-    },
-  },
-  {
     path: '/account',
     name: 'account',
     // eslint-disable-next-line global-require
@@ -66,15 +48,6 @@ const routes = [
         next();
       }
     }
-  },
-  {
-    path: '/create',
-    name: 'createToilet',
-    // eslint-disable-next-line global-require
-    component: require('../views/CreationToilet').default,
-    meta: {
-      requireAuth: false,
-    },
   },
   {
     name: 'logout',

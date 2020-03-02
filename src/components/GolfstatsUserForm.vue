@@ -9,7 +9,7 @@
 
 <script>
 export default {
-  name: 'AirpnpUserForm',
+  name: 'GolfstatsUserForm',
   props: {
     value: {
       type: Object,
