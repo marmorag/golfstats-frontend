@@ -27,9 +27,9 @@ export default class User {
     });
   }
 
-  async getDetails() {
+  async getDetails(user) {
     return new Promise((resolve) => {
-      this.client.get(`${process.env.VUE_APP_API_ENDPOINT}/auth/profile`)
+      this.client.get(`${process.env.VUE_APP_API_ENDPOINT}/users/${user.id}`)
         .then((response) => {
           resolve({ status: true, data: response.data });
         })
@@ -41,7 +41,7 @@ export default class User {
 
   async update(user) {
     return new Promise((resolve) => {
-      this.client.put(`${process.env.VUE_APP_API_ENDPOINT}/auth/profile`, user)
+      this.client.put(`${process.env.VUE_APP_API_ENDPOINT}/users/${user.id}`, user)
         .then(() => {
           resolve({ status: true });
         })

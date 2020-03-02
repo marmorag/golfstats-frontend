@@ -9,15 +9,17 @@ describe('Login', () => {
   });
 
   it('should be able to authenticate into application ', () => {
-    cy.login('airpnp', 'airpnp');
+    cy.login('guillaume.marmorat@gmail.com', 'password');
 
     cy.url().should('eq', 'http://localhost:8080/');
     cy.getStore().then((store) => {
       expect(store.getters['auth/isUserLogged']).to.be.true;
       expect(store.getters['auth/getUser']).to.deep.equal({
         id: 1,
-        username: 'airpnp',
-        email: 'airpnp@airpnp.com'
+        firstname: 'guillaume',
+        lastname: 'marmorat',
+        email: 'guillaume.marmorat@gmail.com',
+        roles: ['ROLE_USER']
       });
     });
   });
