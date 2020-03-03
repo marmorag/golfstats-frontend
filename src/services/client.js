@@ -15,9 +15,8 @@ const createHttpClient = (store) => {
     const isLogged = await store.getters['auth/isUserLogged'];
 
     if (isLogged) {
-      const token = await store.getters['auth/getToken'];
       // eslint-disable-next-line no-param-reassign
-      config.headers.Authorization = `Bearer ${token}`;
+      config.headers['X-AUTH-TOKEN'] = await store.getters['auth/getToken'];
     }
 
     return config;

@@ -5,9 +5,9 @@ export default class User {
 
   async login(credentials) {
     return new Promise((resolve) => {
-      this.client.post(`${process.env.VUE_APP_API_ENDPOINT}/auth/login`, credentials)
+      this.client.post(`${process.env.VUE_APP_API_ENDPOINT}/auth`, credentials)
         .then((res) => {
-          resolve({ status: true, token: res.data.access_token });
+          resolve({ status: true, token: res.data.data.token });
         })
         .catch((error) => {
           resolve({ status: false, message: error.response.data.message });

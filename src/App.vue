@@ -1,51 +1,20 @@
 <template>
   <v-app>
-    <v-app-bar app color="primary" v-if="$route.name !== 'login'">
+    <v-app-bar app color="primary">
       <div class="d-flex align-center">
-        <v-btn to="home">
-          <v-img class="shrink mr-2" contain src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png" transition="scale-transition" width="40" />
+        <v-btn :to="{ name: isUserLogged ? 'dashboard' : 'home' }">
+          <v-img class="shrink mr-2" contain src="./assets/golf-bag.svg" transition="scale-transition" width="40" />
         </v-btn>
       </div>
 
       <v-spacer />
 
       <template v-if="isUserLogged">
-        <v-tooltip bottom>
-          <template v-slot:activator="{ on }">
-            <v-btn v-on="on" text :to="{ name: 'account' }" class="mr-3">
-              <GolfstatsUserAvatar />
-            </v-btn>
-          </template>
-          <span>Acceder a mon compte</span>
-        </v-tooltip>
-
-        <v-tooltip bottom>
-          <template v-slot:activator="{ on }">
-            <v-btn v-on="on" :to="{ name: 'logout' }" data-testid="logout:button">
-              <v-icon>mdi-lock-outline</v-icon>
-            </v-btn>
-          </template>
-          <span>Déconnexion</span>
-        </v-tooltip>
+        <UserLoggedNavbarWidget />
       </template>
 
       <template v-else>
-        <v-tooltip bottom>
-          <template v-slot:activator="{ on }">
-            <v-btn v-on="on" :to="{ name: 'register' }" class="mr-3">
-              <v-icon>mdi-account-plus</v-icon>
-            </v-btn>
-          </template>
-          <span>Register</span>
-        </v-tooltip>
-        <v-tooltip bottom>
-          <template v-slot:activator="{ on }">
-            <v-btn v-on="on" :to="{ name: 'login' }">
-              <v-icon>mdi-login</v-icon>
-            </v-btn>
-          </template>
-          <span>Login</span>
-        </v-tooltip>
+        <NonLoggedNavbarWidget />
       </template>
     </v-app-bar>
 
@@ -58,11 +27,14 @@
 
 <script>
 import GolfstatsToast from './components/GolfstatsToast.vue';
-import GolfstatsUserAvatar from './components/GolfstatsUserAvatar.vue';
+import UserLoggedNavbarWidget from './components/navbar/UserLoggedNavbarWidget.vue';
+import NonLoggedNavbarWidget from './components/navbar/NonLoggedNavbarWidget.vue';
 
 export default {
   name: 'App',
-  components: { GolfstatsUserAvatar, GolfstatsToast },
+  components: {
+    NonLoggedNavbarWidget, UserLoggedNavbarWidget, GolfstatsToast
+  },
   computed: {
     isUserLogged() {
       return this.$store.getters['auth/isUserLogged'];

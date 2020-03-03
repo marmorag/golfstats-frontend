@@ -55,8 +55,9 @@ export default {
   components: { GolfstatsUserAvatar, GolfstatsModalEditProfile, GolfstatsModalDeleteProfile },
   created() {
     this.userApi = new UserApi(this.httpClient);
-
-    this.userApi.getDetails().then((result) => {
+  },
+  async mounted() {
+    this.userApi.getDetails(await this.$store.getters['auth/getUser']).then((result) => {
       this.details = result.status ? result.data : {};
     });
   },
@@ -67,8 +68,8 @@ export default {
   },
   computed: {
     memberSince() {
-      if (this.details.createdAt) {
-        const date = new Date(this.details.createdAt);
+      if (this.details.created) {
+        const date = new Date(this.details.created);
         return format(date, 'iiii i MMMM uuuu');
       }
       return 'N/C';

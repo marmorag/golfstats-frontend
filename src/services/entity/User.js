@@ -1,17 +1,18 @@
 import decode from 'jwt-decode';
 
 export default class User {
-  constructor({ id, username, email }) {
-    this.id = id;
-    this.username = username;
-    this.email = email;
+  constructor(user) {
+    this.id = user.id;
+    this.email = user.email;
+    this.firstname = user.firstname;
+    this.lastname = user.lastname;
+    this.roles = user.roles;
   }
 
   static fromToken(token) {
     if (token) {
       const userData = decode(token);
-
-      return new User(userData);
+      return new User(userData.user);
     }
 
     return null;

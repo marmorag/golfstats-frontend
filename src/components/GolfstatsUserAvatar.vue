@@ -1,5 +1,5 @@
 <template>
-    <v-avatar :color="color" size="30" class="GolfstatsUserAvatar">
+    <v-avatar :color="color" size="45" class="GolfstatsUserAvatar">
         <span :class="`${fontColor}--text headline`">{{ avatar }}</span>
     </v-avatar>
 </template>
@@ -19,7 +19,8 @@ export default {
   },
   computed: {
     avatar() {
-      return this.$store.getters['auth/getUser'].username[0];
+      const user = this.$store.getters['auth/getUser'];
+      return user.firstname[0] + user.lastname[0];
     }
   }
 };
