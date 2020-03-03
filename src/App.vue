@@ -13,19 +13,10 @@
         <v-tooltip bottom>
           <template v-slot:activator="{ on }">
             <v-btn v-on="on" text :to="{ name: 'account' }" class="mr-3">
-              <AirpnpUserAvatar />
+              <GolfstatsUserAvatar />
             </v-btn>
           </template>
           <span>Acceder a mon compte</span>
-        </v-tooltip>
-
-        <v-tooltip bottom>
-          <template v-slot:activator="{ on }">
-            <v-btn v-on="on" :to="{ name: 'mytoilets' }" class="mr-3">
-              <v-icon>mdi-paper-roll-outline</v-icon>
-            </v-btn>
-          </template>
-          <span>My toilets</span>
         </v-tooltip>
 
         <v-tooltip bottom>
@@ -61,17 +52,17 @@
     <v-content>
       <router-view />
     </v-content>
-    <AirpnpToast ref="toast"/>
+    <GolfstatsToast ref="toast"/>
   </v-app>
 </template>
 
 <script>
-import AirpnpToast from './components/GolfstatsToast.vue';
-import AirpnpUserAvatar from './components/GolfstatsUserAvatar.vue';
+import GolfstatsToast from './components/GolfstatsToast.vue';
+import GolfstatsUserAvatar from './components/GolfstatsUserAvatar.vue';
 
 export default {
   name: 'App',
-  components: { AirpnpUserAvatar, AirpnpToast },
+  components: { GolfstatsUserAvatar, GolfstatsToast },
   computed: {
     isUserLogged() {
       return this.$store.getters['auth/isUserLogged'];
